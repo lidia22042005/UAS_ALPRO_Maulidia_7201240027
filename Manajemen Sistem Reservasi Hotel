@@ -1,0 +1,115 @@
+class Pasien:
+    def __init__(self, id_pasien, nama, usia, keluhan):
+        self.id_pasien = id_pasien
+        self.nama = nama
+        self.usia = usia
+        self.keluhan = keluhan
+
+    def __str__(self):
+        return f"ID: {self.id_pasien}, Nama: {self.nama}, Usia: {self.usia}, Keluhan: {self.keluhan}"
+
+
+class SistemAntrianPasien:
+    def __init__(self):
+        self.antrian = []
+
+    def tambah_pasien(self):
+        id_pasien = input("Masukkan ID Pasien: ")
+        nama = input("Masukkan Nama Pasien: ")
+        usia = int(input("Masukkan Usia Pasien: "))
+        keluhan = input("Masukkan Keluhan Pasien: ")
+        pasien = Pasien(id_pasien, nama, usia, keluhan)
+        self.antrian.append(pasien)
+        print("Pasien berhasil ditambahkan ke antrian!\n")
+
+    def tampilkan_antrian(self):
+        if not self.antrian:
+            print("Tidak ada pasien dalam antrian.\n")
+        else:
+            print("\nDaftar Antrian Pasien:")
+            for pasien in self.antrian:
+                print(pasien)
+            print()
+
+    def panggil_pasien(self):
+        if not self.antrian:
+            print("Tidak ada pasien dalam antrian.\n")
+        else:
+            pasien = self.antrian.pop(0)
+            print(f"Pasien dengan ID {pasien.id_pasien} atas nama {pasien.nama} dipanggil.\n")
+
+    def hapus_pasien(self):
+        id_pasien = input("Masukkan ID Pasien yang ingin dihapus: ")
+        for pasien in self.antrian:
+            if pasien.id_pasien == id_pasien:
+                self.antrian.remove(pasien)
+                print("Pasien berhasil dihapus dari antrian!\n")
+                return
+        print("Pasien tidak ditemukan dalam antrian.\n")
+
+    def perbarui_pasien(self):
+        id_pasien = input("Masukkan ID Pasien yang ingin diperbarui: ")
+        for pasien in self.antrian:
+            if pasien.id_pasien == id_pasien:
+                print("Apa yang ingin Anda perbarui?")
+                print("1. Nama")
+                print("2. Usia")
+                print("3. Keluhan")
+                pilihan = int(input("Masukkan pilihan Anda: "))
+                if pilihan == 1:
+                    pasien.nama = input("Masukkan nama baru: ")
+                elif pilihan == 2:
+                    pasien.usia = int(input("Masukkan usia baru: "))
+                elif pilihan == 3:
+                    pasien.keluhan = input("Masukkan keluhan baru: ")
+                else:
+                    print("Pilihan tidak valid.\n")
+                    return
+                print("Data pasien berhasil diperbarui!\n")
+                return
+        print("Pasien tidak ditemukan dalam antrian.\n")
+
+
+def main():
+    sistem = SistemAntrianPasien()
+    while True:
+        print("Sistem Manajemen Antrian Pasien di Klinik")
+        print("1. Tambah Pasien")
+        print("2. Tampilkan Antrian")
+        print("3. Panggil Pasien")
+        print("4. Hapus Pasien")
+        print("5. Perbarui Data Pasien")
+        print("6. Keluar")
+        pilihan = int(input("Masukkan pilihan Anda: "))
+
+        if pilihan == 1:
+            sistem.tambah_pasien()
+        elif pilihan == 2:
+            sistem.tampilkan_antrian()
+        elif pilihan == 3:
+            sistem.panggil_pasien()
+        elif pilihan == 4:
+            sistem.hapus_pasien()
+        elif pilihan == 5:
+            sistem.perbarui_pasien()
+        elif pilihan == 6:
+            print("Keluar dari sistem. Sampai jumpa!")
+            break
+        else:
+            print("Pilihan tidak valid. Silakan coba lagi.\n")
+
+
+if __name__ == "__main__":
+    main()
+
+
+
+OUTPUT 
+
+Sistem Manajemen Antrian Pasien di Klinik
+1. Tambah Pasien
+2. Tampilkan Antrian
+3. Panggil Pasien
+4. Hapus Pasien
+5. Perbarui Data Pasien
+6. Keluar
